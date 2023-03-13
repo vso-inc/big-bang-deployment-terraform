@@ -5,19 +5,23 @@ metadata:
   name: bigbang
 
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  name: environment-repo
-  namespace: bigbang
+  name: bigbang
 spec:
-  interval: 1m
-  url: https://repo1.dso.mil/platform-one/quick-start/big-bang.git
+  ignore: |
+    # exclude file extensions
+    /**/*.md
+    /**/*.txt
+    /**/*.sh
+  interval: 10m
+  url: https://repo1.dso.mil/big-bang/bigbang.git
   ref:
-    branch: master
+    tag: 1.55.0
 
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: environment
@@ -27,5 +31,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: environment-repo
-  path: ./bigbang
+  path: ./base
   prune: true
