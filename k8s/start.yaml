@@ -16,7 +16,7 @@ spec:
     /**/*.txt
     /**/*.sh
   interval: 10m
-  url: https://repo1.dso.mil/big-bang/bigbang.git
+  url: https://github.com/vso-inc/big-bang.git
   ref:
     tag: 1.55.0
 
