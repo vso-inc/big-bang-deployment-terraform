@@ -8,6 +8,9 @@ resource "kubernetes_namespace" "namespace_flux_system" {
       metadata[0].labels,
     ]
   }
+  depends_on = [
+    kubernetes_namespace.namespace_bigbang
+  ]
 }
 
 resource "kubernetes_namespace" "namespace_bigbang" {
