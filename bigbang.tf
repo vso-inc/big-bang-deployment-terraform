@@ -7,6 +7,8 @@ resource "kubectl_manifest" "big_bang" {
   yaml_body = element(data.kubectl_file_documents.bigbang.documents, count.index)
   depends_on = [
     kubectl_manifest.flux_deployment,
-    kubernetes_secret.bb-common-secret
+    kubernetes_secret.bb-common-secret,
+    kubernetes_namespace.namespace_flux_system,
+    kubernetes_namespace.namespace_bigbang
   ]
 }
