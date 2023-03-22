@@ -21,6 +21,7 @@ resource "kubernetes_namespace" "namespace_bigbang" {
     ]
   }
   depends_on = [
-    kubernetes_namespace.namespace_flux_system
+    kubernetes_namespace.namespace_flux_system,
+    kubectl_manifest.flux_deployment
   ]
 }

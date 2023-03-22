@@ -7,7 +7,8 @@ resource "kubectl_manifest" "flux_deployment" {
   yaml_body = element(data.kubectl_file_documents.flux.documents, count.index)
   depends_on = [
     kubernetes_secret.private_registry,
-    kubernetes_config_map.controller-config
+    kubernetes_config_map.controller-config,
+    kubernetes_namespace.namespace_flux_system
   ]
 }
 
