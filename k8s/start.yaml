@@ -1,10 +1,4 @@
 # sourced from https://repo1.dso.mil/platform-one/quick-start/big-bang/-/blob/master/start.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: bigbang
-
----
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:

@@ -8,7 +8,6 @@ resource "kubectl_manifest" "big_bang" {
   depends_on = [
     kubectl_manifest.flux_deployment,
     kubernetes_secret.bb-common-secret,
-    kubernetes_namespace.namespace_flux_system,
-    kubernetes_namespace.namespace_bigbang
+    kubectl_manifest.namespaces
   ]
 }

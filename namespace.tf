@@ -1,27 +1,8 @@
-resource "kubernetes_namespace" "namespace_flux_system" {
-  metadata {
-    name = "flux-system"
-  }
-
-  lifecycle {
-    ignore_changes = [
-      metadata[0].labels,
-    ]
-  }
+data "kubectl_file_documents" "namespaces" {
+  content = file("${path.module}/k8s/namespaces.yaml")
 }
 
-resource "kubernetes_namespace" "namespace_bigbang" {
-  metadata {
-    name = "bigbang"
-  }
-
-  lifecycle {
-    ignore_changes = [
-      metadata[0].labels,
-    ]
-  }
-  depends_on = [
-    kubernetes_namespace.namespace_flux_system,
-    kubectl_manifest.flux_deployment
-  ]
+resource "kubectl_manifest" "namespaces" {
+  count     = length(data.kubectl_file_documents.namespaces.documents)
+  yaml_body = element(data.kubectl_file_documents.flux.documents, count.index)
 }

@@ -16,6 +16,6 @@ resource "kubernetes_secret" "custom_credentials" {
   }
 
   depends_on = [
-    kubernetes_namespace.namespace_flux_system
+    kubectl_manifest.namespaces
   ]
 }

@@ -33,6 +33,6 @@ resource "kubernetes_secret" "bb-common-secret" {
   }
 
   depends_on = [
-    kubernetes_namespace.namespace_bigbang
+    kubectl_manifest.namespaces
   ]
 }

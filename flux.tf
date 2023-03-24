@@ -8,14 +8,14 @@ resource "kubectl_manifest" "flux_deployment" {
   depends_on = [
     kubernetes_secret.private_registry,
     kubernetes_config_map.controller-config,
-    kubernetes_namespace.namespace_flux_system
+    kubectl_manifest.namespaces
   ]
 }
 
 resource "kubernetes_config_map" "controller-config" {
   count = var.custom_flux_file == "" ? 0 : 1
   depends_on = [
-    kubernetes_namespace.namespace_flux_system
+    kubectl_manifest.namespaces
   ]
   metadata {
     name      = "controller-config"
